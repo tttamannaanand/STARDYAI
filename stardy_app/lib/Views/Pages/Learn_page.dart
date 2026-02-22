@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../widgets/color_codes.dart';
 import '../widgets/courseModel.dart';
 import '../widgets/courseCard.dart';
+import '../widgets/course_data.dart'; // ✅ IMPORT DATA FILE
 
 class LearnPage extends StatefulWidget {
   const LearnPage({super.key});
@@ -13,29 +14,6 @@ class LearnPage extends StatefulWidget {
 class _LearnPageState extends State<LearnPage> {
   final day_streak = 8;
   bool isSearching = false;
-  final List<Course> courses = [
-    Course(
-      title: "Mastering Python",
-      image: "assets/images/stardy-logo.png",
-      rating: 5.0,
-      progress: 0.65,
-      category: "TECH",
-    ),
-    Course(
-      title: "Flutter UI Design",
-      image: "assets/images/stardy-logo.png",
-      rating: 4.8,
-      progress: 0.45,
-      category: "MOBILE",
-    ),
-    Course(
-      title: "AI Fundamentals",
-      image: "assets/images/stardy-logo.png",
-      rating: 4.9,
-      progress: 0.80,
-      category: "AI",
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +22,6 @@ class _LearnPageState extends State<LearnPage> {
         toolbarHeight: 60,
         backgroundColor: AppColors.primaryDarkBlue,
         elevation: 0,
-
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -86,7 +63,7 @@ class _LearnPageState extends State<LearnPage> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(25),
                           ),
-                          child: TextField(
+                          child: const TextField(
                             autofocus: true,
                             decoration: InputDecoration(
                               hintText: "Search courses...",
@@ -99,7 +76,7 @@ class _LearnPageState extends State<LearnPage> {
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.close, color: AppColors.white),
+                        icon: const Icon(Icons.close, color: AppColors.white),
                         onPressed: () {
                           setState(() {
                             isSearching = false;
@@ -114,7 +91,7 @@ class _LearnPageState extends State<LearnPage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'Learning Center',
                             style: TextStyle(
                               color: AppColors.white,
@@ -124,15 +101,15 @@ class _LearnPageState extends State<LearnPage> {
                           ),
                           Row(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.flash_on_sharp,
                                 color: AppColors.primaryOrange,
                                 size: 25,
                               ),
-                              SizedBox(width: 6),
+                              const SizedBox(width: 6),
                               Text(
                                 "$day_streak Day Streaks",
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: AppColors.primaryOrange,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 20,
@@ -156,7 +133,7 @@ class _LearnPageState extends State<LearnPage> {
                         ),
                         child: IconButton(
                           padding: EdgeInsets.zero,
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.search,
                             color: AppColors.white,
                             size: 20,
@@ -173,11 +150,13 @@ class _LearnPageState extends State<LearnPage> {
           ),
         ),
       ),
+
+      /// ---------------- BODY ----------------
       body: Container(
         color: Colors.black,
         padding: const EdgeInsets.all(16),
         child: ListView.builder(
-          itemCount: courses.length,
+          itemCount: courses.length, // ✅ from data file
           itemBuilder: (context, index) {
             return CourseCard(course: courses[index]);
           },
