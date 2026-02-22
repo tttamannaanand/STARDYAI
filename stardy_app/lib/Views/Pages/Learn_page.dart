@@ -11,7 +11,7 @@ class LearnPage extends StatefulWidget {
 }
 
 class _LearnPageState extends State<LearnPage> {
-  final day_streak = 7;
+  final day_streak = 8;
   bool isSearching = false;
   final List<Course> courses = [
     Course(
