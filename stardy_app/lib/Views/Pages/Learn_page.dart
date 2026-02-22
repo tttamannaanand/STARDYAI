@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/color_codes.dart';
+import '../widgets/courseModel.dart';
+import '../widgets/courseCard.dart';
 
 class LearnPage extends StatefulWidget {
   const LearnPage({super.key});
@@ -11,6 +13,30 @@ class LearnPage extends StatefulWidget {
 class _LearnPageState extends State<LearnPage> {
   final day_streak = 7;
   bool isSearching = false;
+  final List<Course> courses = [
+    Course(
+      title: "Mastering Python",
+      image: "assets/images/stardy-logo.png",
+      rating: 5.0,
+      progress: 0.65,
+      category: "TECH",
+    ),
+    Course(
+      title: "Flutter UI Design",
+      image: "assets/images/stardy-logo.png",
+      rating: 4.8,
+      progress: 0.45,
+      category: "MOBILE",
+    ),
+    Course(
+      title: "AI Fundamentals",
+      image: "assets/images/stardy-logo.png",
+      rating: 4.9,
+      progress: 0.80,
+      category: "AI",
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +81,7 @@ class _LearnPageState extends State<LearnPage> {
                     children: [
                       Expanded(
                         child: Container(
-                          height: 40,
+                          height: 46,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(25),
@@ -145,6 +171,16 @@ class _LearnPageState extends State<LearnPage> {
                     ],
                   ),
           ),
+        ),
+      ),
+      body: Container(
+        color: Colors.black,
+        padding: const EdgeInsets.all(16),
+        child: ListView.builder(
+          itemCount: courses.length,
+          itemBuilder: (context, index) {
+            return CourseCard(course: courses[index]);
+          },
         ),
       ),
     );
