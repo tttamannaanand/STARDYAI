@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:stardy_app/Views/screens/Larning_Page.dart';
-import '../widgets/color_codes.dart';
 import '../widgets/courseModel.dart';
+import '../widgets/color_codes.dart';
+import '../screens/Video_Larning_Page.dart';
 
 class CourseDetailsPage extends StatelessWidget {
   final Course course;
@@ -16,12 +16,13 @@ class CourseDetailsPage extends StatelessWidget {
       /// ---------------- APP BAR ----------------
       appBar: AppBar(
         backgroundColor: AppColors.primaryDarkBlue,
-        iconTheme: IconThemeData(
-          color: AppColors.white, // Back button color
-        ),
+        iconTheme: const IconThemeData(color: AppColors.white),
         title: Text(
           course.title,
-          style: TextStyle(color: AppColors.white, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+            color: AppColors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
 
@@ -30,7 +31,7 @@ class CourseDetailsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// Thumbnail
+            /// Course Image
             Image.asset(
               course.image,
               width: double.infinity,
@@ -128,6 +129,17 @@ class CourseDetailsPage extends StatelessWidget {
 
                   const SizedBox(height: 20),
 
+                  /// Chapters Count (New 🔥)
+                  Text(
+                    "Total Chapters: ${course.chapters.length}",
+                    style: const TextStyle(
+                      color: AppColors.primaryOrange,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+
+                  const SizedBox(height: 20),
+
                   /// Description
                   const Text(
                     "Description",
@@ -145,7 +157,7 @@ class CourseDetailsPage extends StatelessWidget {
                     style: const TextStyle(color: Colors.grey, height: 1.5),
                   ),
 
-                  const SizedBox(height: 80), // Space for bottom button
+                  const SizedBox(height: 80),
                 ],
               ),
             ),
@@ -153,7 +165,7 @@ class CourseDetailsPage extends StatelessWidget {
         ),
       ),
 
-      /// ---------------- BOTTOM BUTTON ----------------
+      /// ---------------- START BUTTON ----------------
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16),
         child: SizedBox(
@@ -166,11 +178,10 @@ class CourseDetailsPage extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              /// Example Navigation
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => LearningPage(course: course),
+                  builder: (context) => VideoLearningPage(course: course),
                 ),
               );
             },
@@ -188,5 +199,3 @@ class CourseDetailsPage extends StatelessWidget {
     );
   }
 }
-
-/// ---------------- SAMPLE LEARNING PAGE ----------------

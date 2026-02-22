@@ -1,48 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import '../widgets/color_codes.dart';
 import '../widgets/courseModel.dart';
+import '../widgets/color_codes.dart';
 
-class LearningPage extends StatefulWidget {
+class VideoLearningPage extends StatefulWidget {
   final Course course;
 
-  const LearningPage({super.key, required this.course});
+  const VideoLearningPage({super.key, required this.course});
 
   @override
-  State<LearningPage> createState() => _LearningPageState();
+  State<VideoLearningPage> createState() => _VideoLearningPageState();
 }
 
-class _LearningPageState extends State<LearningPage> {
+class _VideoLearningPageState extends State<VideoLearningPage> {
   YoutubePlayerController? _controller;
 
   int currentIndex = 0;
   String? currentVideoId;
   Set<String> completedVideos = {};
-
-  final List<Map<String, dynamic>> chapters = [
-    {
-      "chapter": "Chapter 1: Introduction",
-      "topics": [
-        {
-          "title": "Flutter Basics",
-          "url": "https://www.youtube.com/watch?v=1ukSR1GRtMU",
-        },
-        {
-          "title": "Dart Basics",
-          "url": "https://www.youtube.com/watch?v=Ej_Pcr4uC2Q",
-        },
-      ],
-    },
-    {
-      "chapter": "Chapter 2: UI Design",
-      "topics": [
-        {
-          "title": "Widgets Explained",
-          "url": "https://www.youtube.com/watch?v=x0uinJvhNxI",
-        },
-      ],
-    },
-  ];
 
   List<Map<String, String>> allVideos = [];
 
@@ -50,13 +25,17 @@ class _LearningPageState extends State<LearningPage> {
   void initState() {
     super.initState();
     flattenVideos();
-    loadVideo(0);
+    if (allVideos.isNotEmpty) {
+      loadVideo(0);
+    }
   }
 
   void flattenVideos() {
-    for (var chapter in chapters) {
-      for (var topic in chapter["topics"]) {
-        allVideos.add({"title": topic["title"], "url": topic["url"]});
+    allVideos.clear();
+
+    for (var chapter in widget.course.chapters) {
+      for (var topic in chapter.topics) {
+        allVideos.add({"title": topic.title, "url": topic.videoUrl});
       }
     }
   }
@@ -87,6 +66,7 @@ class _LearningPageState extends State<LearningPage> {
     });
   }
 
+  /// ---------------- CONTROLS ----------------
   void togglePlayPause() {
     if (_controller == null) return;
 
@@ -121,6 +101,7 @@ class _LearningPageState extends State<LearningPage> {
   }
 
   double getProgress() {
+    if (allVideos.isEmpty) return 0;
     return completedVideos.length / allVideos.length;
   }
 
@@ -137,17 +118,18 @@ class _LearningPageState extends State<LearningPage> {
       appBar: AppBar(
         backgroundColor: AppColors.primaryDarkBlue,
         iconTheme: const IconThemeData(color: Colors.white),
-        title: const Text(
-          "Course Learning",
-          style: TextStyle(color: Colors.white),
+        title: Text(
+          widget.course.title,
+          style: const TextStyle(color: Colors.white),
         ),
       ),
       body: Column(
         children: [
-          YoutubePlayer(
-            controller: _controller!,
-            showVideoProgressIndicator: true,
-          ),
+          if (_controller != null)
+            YoutubePlayer(
+              controller: _controller!,
+              showVideoProgressIndicator: true,
+            ),
 
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -181,7 +163,6 @@ class _LearningPageState extends State<LearningPage> {
             ],
           ),
 
-          /// ---------------- PROGRESS BAR ----------------
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
@@ -203,57 +184,55 @@ class _LearningPageState extends State<LearningPage> {
 
           const SizedBox(height: 10),
 
-          /// ---------------- CHAPTER UI ----------------
           Expanded(
             child: ListView.builder(
-              itemCount: chapters.length,
+              itemCount: widget.course.chapters.length,
               itemBuilder: (context, chapterIndex) {
+                var chapter = widget.course.chapters[chapterIndex];
+
                 return ExpansionTile(
                   collapsedIconColor: Colors.white,
                   iconColor: AppColors.primaryOrange,
                   title: Text(
-                    chapters[chapterIndex]["chapter"],
+                    chapter.title,
                     style: const TextStyle(color: Colors.white),
                   ),
-                  children: List.generate(
-                    chapters[chapterIndex]["topics"].length,
-                    (topicIndex) {
-                      var topic = chapters[chapterIndex]["topics"][topicIndex];
+                  children: List.generate(chapter.topics.length, (topicIndex) {
+                    var topic = chapter.topics[topicIndex];
 
-                      String videoId = YoutubePlayer.convertUrlToId(
-                        topic["url"],
-                      )!;
+                    String videoId = YoutubePlayer.convertUrlToId(
+                      topic.videoUrl,
+                    )!;
 
-                      int flatIndex = allVideos.indexWhere(
-                        (video) => video["url"] == topic["url"],
-                      );
+                    int flatIndex = allVideos.indexWhere(
+                      (video) => video["url"] == topic.videoUrl,
+                    );
 
-                      IconData icon;
-                      Color iconColor;
+                    IconData icon;
+                    Color iconColor;
 
-                      if (completedVideos.contains(videoId)) {
-                        icon = Icons.check_circle;
-                        iconColor = Colors.green;
-                      } else if (flatIndex == currentIndex) {
-                        icon = Icons.pause_circle;
-                        iconColor = Colors.blue;
-                      } else {
-                        icon = Icons.play_circle_fill;
-                        iconColor = Colors.orange;
-                      }
+                    if (completedVideos.contains(videoId)) {
+                      icon = Icons.check_circle;
+                      iconColor = Colors.green;
+                    } else if (flatIndex == currentIndex) {
+                      icon = Icons.pause_circle;
+                      iconColor = Colors.blue;
+                    } else {
+                      icon = Icons.play_circle_fill;
+                      iconColor = Colors.orange;
+                    }
 
-                      return ListTile(
-                        leading: Icon(icon, color: iconColor),
-                        title: Text(
-                          topic["title"],
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        onTap: () {
-                          loadVideo(flatIndex);
-                        },
-                      );
-                    },
-                  ),
+                    return ListTile(
+                      leading: Icon(icon, color: iconColor),
+                      title: Text(
+                        topic.title,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      onTap: () {
+                        loadVideo(flatIndex);
+                      },
+                    );
+                  }),
                 );
               },
             ),
