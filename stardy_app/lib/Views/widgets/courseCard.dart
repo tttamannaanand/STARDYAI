@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../widgets/color_codes.dart';
 import '../widgets/courseModel.dart';
 
+import '../screens/Course_details_page.dart';
+
 class CourseCard extends StatelessWidget {
   final Course course;
 
@@ -126,7 +128,15 @@ class CourseCard extends StatelessWidget {
                       backgroundColor: AppColors.primaryOrange,
                       shape: const StadiumBorder(),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              CourseDetailsPage(course: course),
+                        ),
+                      );
+                    },
                     child: const Text("Resume"),
                   ),
                 ),
