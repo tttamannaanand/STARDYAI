@@ -9,7 +9,7 @@ import 'package:stardy_app/data/notifiiers.dart';
 List<Widget> pages = [
   HomePage(),
   LearnPage(),
-  Opportunity_page(),
+  OpportunitiesPage(),
   ProfilePage(),
 ];
 

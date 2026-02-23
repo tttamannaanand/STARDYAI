@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import '../widgets/courseModel.dart';
+import '../widgets/Course_Source/courseModel.dart';
 import '../widgets/color_codes.dart';
 
 class VideoLearningPage extends StatefulWidget {

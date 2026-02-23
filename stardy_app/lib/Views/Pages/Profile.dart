@@ -19,7 +19,7 @@ class ProfilePage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: const [
-                  _RoundIconBtn(icon: Icons.chevron_left_rounded),
+                  _RoundIconBtn(icon: Icons.notifications),
                   _RoundIconBtn(icon: Icons.share_outlined),
                 ],
               ),

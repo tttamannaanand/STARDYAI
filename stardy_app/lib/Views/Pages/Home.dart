@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stardy_app/Views/screens/Video_Larning_Page.dart';
 import 'package:stardy_app/data/notifiiers.dart';
-import '../widgets/courseModel.dart';
-import '../widgets/course_data.dart';
+import '../widgets/Course_Source/courseModel.dart';
+import '../widgets/Course_Source/course_data.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
   // ───────────────── HEADER ─────────────────
   Widget _buildHeader() {
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 60, 2, 50),
+      padding: const EdgeInsets.fromLTRB(20, 60, 17, 50),
       decoration: const BoxDecoration(
         color: Color(0xFF09254a),
         borderRadius: BorderRadius.only(
@@ -80,7 +80,7 @@ class HomePage extends StatelessWidget {
                     ),
                     child: const Center(
                       child: Text(
-                        'Y',
+                        'S',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 22,
@@ -102,7 +102,7 @@ class HomePage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: const Text(
-                        'LV.12',
+                        'LV.15',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 9,
@@ -127,7 +127,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Yash, ready to level up?',
+                      'Stardy.Ai, ready to level up?',
                       style: TextStyle(color: Color(0xFFf89820), fontSize: 13),
                     ),
                   ],
