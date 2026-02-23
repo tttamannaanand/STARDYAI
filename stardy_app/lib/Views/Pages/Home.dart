@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:stardy_app/Views/screens/Video_Larning_Page.dart';
-import 'package:stardy_app/data/notifiiers.dart';
-import '../widgets/Course_Source/courseModel.dart';
 import '../widgets/Course_Source/course_data.dart';
 
 class HomePage extends StatelessWidget {
