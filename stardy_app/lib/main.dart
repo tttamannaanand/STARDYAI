@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stardy_app/Views/widgets/widget_tree.dart';
+import 'Views/screens/splash_screen.dart';
+import 'Views/Pages/signup.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,14 +9,25 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Stardy',
-
-      home: widgetTree(),
+      initialRoute: getInitialRoute(),
+      routes: getAppRoutes(),
     );
   }
+}
+
+/// 🔹 Initial route function
+String getInitialRoute() {
+  return '/';
+}
+
+/// 🔹 Routes map function
+Map<String, WidgetBuilder> getAppRoutes() {
+  return {
+    '/': (context) => const SplashScreen(),
+    '/login': (context) => const AuthPage(),
+  };
 }

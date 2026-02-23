@@ -6,7 +6,12 @@ import 'package:stardy_app/Views/Pages/Opportunity_page.dart';
 import 'package:stardy_app/Views/widgets/navbar_widget.dart';
 import 'package:stardy_app/data/notifiiers.dart';
 
-List<Widget> pages = [Home(), LearnPage(), Opportunity_page(), Profile()];
+List<Widget> pages = [
+  HomePage(),
+  LearnPage(),
+  Opportunity_page(),
+  ProfilePage(),
+];
 
 class widgetTree extends StatelessWidget {
   const widgetTree({super.key});
