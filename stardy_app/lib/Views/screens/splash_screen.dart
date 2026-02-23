@@ -19,7 +19,6 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     _startLoading();
   }
-
   void _startLoading() {
     int elapsed = 0;
     _timer = Timer.periodic(const Duration(milliseconds: 30), (timer) {
