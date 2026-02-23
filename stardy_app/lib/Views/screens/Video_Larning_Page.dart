@@ -18,21 +18,18 @@ class _VideoLearningPageState extends State<VideoLearningPage> {
   int currentIndex = 0;
   String? currentVideoId;
   Set<String> completedVideos = {};
-
   List<Map<String, String>> allVideos = [];
 
   @override
   void initState() {
     super.initState();
-    flattenVideos();
+    _flattenVideos();
     if (allVideos.isNotEmpty) {
-      loadVideo(0);
+      _loadVideo(0);
     }
   }
 
-  void flattenVideos() {
-    allVideos.clear();
-
+  void _flattenVideos() {
     for (var chapter in widget.course.chapters) {
       for (var topic in chapter.topics) {
         allVideos.add({"title": topic.title, "url": topic.videoUrl});
@@ -40,9 +37,8 @@ class _VideoLearningPageState extends State<VideoLearningPage> {
     }
   }
 
-  void loadVideo(int index) {
-    String url = allVideos[index]["url"]!;
-    String videoId = YoutubePlayer.convertUrlToId(url)!;
+  void _loadVideo(int index) {
+    final videoId = YoutubePlayer.convertUrlToId(allVideos[index]["url"]!)!;
 
     _controller?.dispose();
 
@@ -52,11 +48,10 @@ class _VideoLearningPageState extends State<VideoLearningPage> {
     );
 
     _controller!.addListener(() {
-      setState(() {});
-
       if (_controller!.value.position >= _controller!.value.metaData.duration &&
           !_controller!.value.isPlaying) {
         completedVideos.add(videoId);
+        setState(() {});
       }
     });
 
@@ -64,40 +59,6 @@ class _VideoLearningPageState extends State<VideoLearningPage> {
       currentIndex = index;
       currentVideoId = videoId;
     });
-  }
-
-  /// ---------------- CONTROLS ----------------
-  void togglePlayPause() {
-    if (_controller == null) return;
-
-    if (_controller!.value.isPlaying) {
-      _controller!.pause();
-    } else {
-      _controller!.play();
-    }
-    setState(() {});
-  }
-
-  void nextVideo() {
-    if (currentIndex < allVideos.length - 1) {
-      loadVideo(currentIndex + 1);
-    }
-  }
-
-  void previousVideo() {
-    if (currentIndex > 0) {
-      loadVideo(currentIndex - 1);
-    }
-  }
-
-  void skipForward() {
-    final pos = _controller!.value.position;
-    _controller!.seekTo(pos + const Duration(seconds: 10));
-  }
-
-  void skipBackward() {
-    final pos = _controller!.value.position;
-    _controller!.seekTo(pos - const Duration(seconds: 10));
   }
 
   double getProgress() {
@@ -111,6 +72,7 @@ class _VideoLearningPageState extends State<VideoLearningPage> {
     super.dispose();
   }
 
+  // ───────────────── UI ─────────────────
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -131,47 +93,70 @@ class _VideoLearningPageState extends State<VideoLearningPage> {
               showVideoProgressIndicator: true,
             ),
 
+          // CONTROLS
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconButton(
-                onPressed: previousVideo,
+                onPressed: () {
+                  if (currentIndex > 0) {
+                    _loadVideo(currentIndex - 1);
+                  }
+                },
                 icon: const Icon(Icons.skip_previous, color: Colors.white),
               ),
               IconButton(
-                onPressed: skipBackward,
+                onPressed: () {
+                  final pos = _controller!.value.position;
+                  _controller!.seekTo(pos - const Duration(seconds: 10));
+                },
                 icon: const Icon(Icons.replay_10, color: Colors.white),
               ),
               IconButton(
-                onPressed: togglePlayPause,
+                onPressed: () {
+                  if (_controller!.value.isPlaying) {
+                    _controller!.pause();
+                  } else {
+                    _controller!.play();
+                  }
+                  setState(() {});
+                },
                 icon: Icon(
-                  _controller != null && _controller!.value.isPlaying
+                  _controller!.value.isPlaying
                       ? Icons.pause_circle_filled
                       : Icons.play_circle_fill,
-                  color: Colors.orange,
+                  color: AppColors.primaryOrange,
                   size: 40,
                 ),
               ),
               IconButton(
-                onPressed: skipForward,
+                onPressed: () {
+                  final pos = _controller!.value.position;
+                  _controller!.seekTo(pos + const Duration(seconds: 10));
+                },
                 icon: const Icon(Icons.forward_10, color: Colors.white),
               ),
               IconButton(
-                onPressed: nextVideo,
+                onPressed: () {
+                  if (currentIndex < allVideos.length - 1) {
+                    _loadVideo(currentIndex + 1);
+                  }
+                },
                 icon: const Icon(Icons.skip_next, color: Colors.white),
               ),
             ],
           ),
 
+          // PROGRESS
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
                 LinearProgressIndicator(
                   value: getProgress(),
+                  minHeight: 8,
                   backgroundColor: Colors.grey[800],
                   color: AppColors.primaryOrange,
-                  minHeight: 8,
                 ),
                 const SizedBox(height: 6),
                 Text(
@@ -184,55 +169,52 @@ class _VideoLearningPageState extends State<VideoLearningPage> {
 
           const SizedBox(height: 10),
 
+          // CHAPTERS & TOPICS
           Expanded(
             child: ListView.builder(
               itemCount: widget.course.chapters.length,
               itemBuilder: (context, chapterIndex) {
-                var chapter = widget.course.chapters[chapterIndex];
+                final chapter = widget.course.chapters[chapterIndex];
 
                 return ExpansionTile(
-                  collapsedIconColor: Colors.white,
                   iconColor: AppColors.primaryOrange,
+                  collapsedIconColor: Colors.white,
                   title: Text(
                     chapter.title,
                     style: const TextStyle(color: Colors.white),
                   ),
-                  children: List.generate(chapter.topics.length, (topicIndex) {
-                    var topic = chapter.topics[topicIndex];
-
-                    String videoId = YoutubePlayer.convertUrlToId(
+                  children: chapter.topics.map((topic) {
+                    final videoId = YoutubePlayer.convertUrlToId(
                       topic.videoUrl,
                     )!;
 
-                    int flatIndex = allVideos.indexWhere(
-                      (video) => video["url"] == topic.videoUrl,
+                    final flatIndex = allVideos.indexWhere(
+                      (e) => e["url"] == topic.videoUrl,
                     );
 
                     IconData icon;
-                    Color iconColor;
+                    Color color;
 
                     if (completedVideos.contains(videoId)) {
                       icon = Icons.check_circle;
-                      iconColor = Colors.green;
+                      color = Colors.green;
                     } else if (flatIndex == currentIndex) {
                       icon = Icons.pause_circle;
-                      iconColor = Colors.blue;
+                      color = Colors.blue;
                     } else {
                       icon = Icons.play_circle_fill;
-                      iconColor = Colors.orange;
+                      color = AppColors.primaryOrange;
                     }
 
                     return ListTile(
-                      leading: Icon(icon, color: iconColor),
+                      leading: Icon(icon, color: color),
                       title: Text(
                         topic.title,
                         style: const TextStyle(color: Colors.white),
                       ),
-                      onTap: () {
-                        loadVideo(flatIndex);
-                      },
+                      onTap: () => _loadVideo(flatIndex),
                     );
-                  }),
+                  }).toList(),
                 );
               },
             ),

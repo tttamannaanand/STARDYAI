@@ -22,7 +22,7 @@ class _LearnPageState extends State<LearnPage> {
       backgroundColor: Colors.black,
 
       appBar: AppBar(
-        toolbarHeight: 50, 
+        toolbarHeight: 60,
         backgroundColor: AppColors.primaryDarkBlue,
         elevation: 0,
         titleSpacing: 16,
@@ -34,11 +34,11 @@ class _LearnPageState extends State<LearnPage> {
               style: TextStyle(
                 color: AppColors.white,
                 fontWeight: FontWeight.bold,
-                fontSize: 18, 
+                fontSize: 18,
               ),
             ),
             Container(
-              height: 32, 
+              height: 32,
               width: 32,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -53,9 +53,9 @@ class _LearnPageState extends State<LearnPage> {
         ),
 
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(85), 
+          preferredSize: const Size.fromHeight(95), // 🔥 MORE SPACE
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 10),
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
             child: isSearching ? _buildSearchBar() : _buildHeaderWithTabs(),
           ),
         ),
@@ -76,7 +76,7 @@ class _LearnPageState extends State<LearnPage> {
     );
   }
 
-
+  // ───────────────── HEADER + TABS ─────────────────
   Widget _buildHeaderWithTabs() {
     return Column(
       children: [
@@ -88,15 +88,15 @@ class _LearnPageState extends State<LearnPage> {
                 const Icon(
                   Icons.flash_on,
                   color: AppColors.primaryOrange,
-                  size: 18, // 🔥 smaller icon
+                  size: 18,
                 ),
-                const SizedBox(width: 4),
+                const SizedBox(width: 6),
                 Text(
                   "$dayStreak Day Streak",
                   style: const TextStyle(
                     color: AppColors.primaryOrange,
                     fontWeight: FontWeight.w600,
-                    fontSize: 13, 
+                    fontSize: 14,
                   ),
                 ),
               ],
@@ -104,7 +104,7 @@ class _LearnPageState extends State<LearnPage> {
             IconButton(
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(),
-              icon: const Icon(Icons.search, color: AppColors.white, size: 20),
+              icon: const Icon(Icons.search, color: AppColors.white, size: 22),
               onPressed: () {
                 setState(() {
                   isSearching = true;
@@ -114,36 +114,36 @@ class _LearnPageState extends State<LearnPage> {
           ],
         ),
 
-        const SizedBox(height: 8),
+        const SizedBox(height: 12),
 
         _buildTabs(),
       ],
     );
   }
 
-
+  // ───────────────── SEARCH BAR ─────────────────
   Widget _buildSearchBar() {
     return Row(
       children: [
         Expanded(
           child: Container(
-            height: 46, // 🔥 smaller
+            height: 48,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(25),
+              borderRadius: BorderRadius.circular(26),
             ),
             child: const TextField(
               autofocus: true,
               decoration: InputDecoration(
                 hintText: "Search courses...",
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                contentPadding: EdgeInsets.symmetric(horizontal: 18),
               ),
             ),
           ),
         ),
         IconButton(
-          icon: const Icon(Icons.close, color: AppColors.white, size: 20),
+          icon: const Icon(Icons.close, color: AppColors.white, size: 22),
           onPressed: () {
             setState(() {
               isSearching = false;
@@ -154,14 +154,16 @@ class _LearnPageState extends State<LearnPage> {
     );
   }
 
-
+  // ───────────────── CATEGORY TABS (INCREASED) ─────────────────
   Widget _buildTabs() {
     final tabs = ["Beginner", "Intermediate", "Advanced"];
 
     return Container(
+      height: 50, // 🔥 BIGGER HEIGHT
+      padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
         color: const Color(0xFF1E1E1E),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(28),
       ),
       child: Row(
         children: tabs.map((tab) {
@@ -177,16 +179,19 @@ class _LearnPageState extends State<LearnPage> {
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                ), // 🔥 MORE TAP AREA
                 decoration: BoxDecoration(
                   color: isSelected
                       ? AppColors.primaryOrange
                       : Colors.transparent,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(24),
                 ),
                 child: Text(
                   tab,
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 15, // 🔥 BIGGER TEXT
                     color: isSelected ? AppColors.white : AppColors.grey,
                     fontWeight: FontWeight.w600,
                   ),
