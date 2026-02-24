@@ -21,19 +21,19 @@ class _NavbarWidgetState extends State<NavbarWidget> {
 
             indicatorColor: Colors.transparent,
 
-            iconTheme: WidgetStateProperty.resolveWith<IconThemeData>((
+            iconTheme: MaterialStateProperty.resolveWith<IconThemeData>((
               states,
             ) {
-              if (states.contains(WidgetState.selected)) {
+              if (states.contains(MaterialState.selected)) {
                 return IconThemeData(color: AppColors.primaryOrange, size: 26);
               }
               return const IconThemeData(color: Colors.grey, size: 24);
             }),
 
-            labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>((
+            labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>((
               states,
             ) {
-              if (states.contains(WidgetState.selected)) {
+              if (states.contains(MaterialState.selected)) {
                 return TextStyle(
                   color: AppColors.primaryOrange,
                   fontWeight: FontWeight.w600,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/courseModel.dart';
+import '../widgets/Course_Source/courseModel.dart';
 import '../widgets/color_codes.dart';
 import '../screens/Video_Larning_Page.dart';
 

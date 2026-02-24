@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/color_codes.dart';
-import '../widgets/courseCard.dart';
-import '../widgets/course_data.dart';
+import '../widgets/Course_Source/courseCard.dart';
+import '../widgets/Course_Source/course_data.dart';
 
 class LearnPage extends StatefulWidget {
   const LearnPage({super.key});

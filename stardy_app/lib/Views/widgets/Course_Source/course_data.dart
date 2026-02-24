@@ -1,4 +1,4 @@
-import '../widgets/courseModel.dart';
+import 'courseModel.dart';
 
 final List<Course> courses = [
   /// ---------------- BEGINNER ----------------
