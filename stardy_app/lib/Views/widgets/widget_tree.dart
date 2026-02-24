@@ -3,7 +3,7 @@ import 'package:stardy_app/Views/Pages/Home.dart';
 import 'package:stardy_app/Views/Pages/Profile.dart';
 import 'package:stardy_app/Views/Pages/Learn_page.dart';
 import 'package:stardy_app/Views/Pages/Opportunity_page.dart';
-import 'package:stardy_app/Views/widgets/navbar_widget.dart';
+import 'package:stardy_app/Views/widgets/NavBar.dart';
 import 'package:stardy_app/data/notifiiers.dart';
 
 List<Widget> pages = [
