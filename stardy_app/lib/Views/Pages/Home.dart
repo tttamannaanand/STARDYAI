@@ -125,7 +125,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Stardy.Ai, ready to level up?',
+                      'Sai , ready to level up?',
                       style: TextStyle(color: Color(0xFFf89820), fontSize: 13),
                     ),
                   ],

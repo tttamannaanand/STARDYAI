@@ -98,7 +98,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       ),
                     ),
                     const Text(
-                      'Get Skill, Get STARDY!',
+                      'Get Skilled, Get STARDY!',
                       style: TextStyle(
                         color: AppColors.primaryOrange,
                         fontSize: 14,
