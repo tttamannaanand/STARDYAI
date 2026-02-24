@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stardy_app/Views/widgets/color_codes.dart';
 import 'dart:async';
 import '../Pages/signup.dart';
 
@@ -85,13 +86,26 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Text(
-                  'Stardy.AI',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Stardy.AI',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Text(
+                      'Get Skill, Get STARDY!',
+                      style: TextStyle(
+                        color: AppColors.primaryOrange,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 30),
                 Padding(
