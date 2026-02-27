@@ -17,7 +17,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
       builder: (context, selectedPage, child) {
         return NavigationBarTheme(
           data: NavigationBarThemeData(
-            backgroundColor: AppColors.primaryDarkBlue,
+            backgroundColor: AppColors.black,
 
             indicatorColor: Colors.transparent,
 
@@ -25,7 +25,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               states,
             ) {
               if (states.contains(MaterialState.selected)) {
-                return IconThemeData(color: AppColors.primaryOrange, size: 26);
+                return IconThemeData(color: AppColors.darkRed, size: 26);
               }
               return const IconThemeData(color: Colors.grey, size: 24);
             }),
@@ -35,7 +35,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
             ) {
               if (states.contains(MaterialState.selected)) {
                 return TextStyle(
-                  color: AppColors.primaryOrange,
+                  color: AppColors.darkRed,
                   fontWeight: FontWeight.w600,
                 );
               }

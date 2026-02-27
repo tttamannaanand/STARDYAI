@@ -23,7 +23,7 @@ class _LearnPageState extends State<LearnPage> {
 
       appBar: AppBar(
         toolbarHeight: 60,
-        backgroundColor: AppColors.primaryDarkBlue,
+        backgroundColor: AppColors.black,
         elevation: 0,
         titleSpacing: 16,
         title: Row(
@@ -63,8 +63,9 @@ class _LearnPageState extends State<LearnPage> {
 
       body: SafeArea(
         top: false,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
+        child: Container(
+          color: AppColors.white, // 👈 BODY BACKGROUND
+          padding: const EdgeInsets.fromLTRB(14, 2, 14, 0),
           child: ListView(
             children: courses
                 .where((course) => course.category == selectedCategory)
@@ -85,16 +86,12 @@ class _LearnPageState extends State<LearnPage> {
           children: [
             Row(
               children: [
-                const Icon(
-                  Icons.flash_on,
-                  color: AppColors.primaryOrange,
-                  size: 18,
-                ),
+                const Icon(Icons.flash_on, color: AppColors.darkRed, size: 18),
                 const SizedBox(width: 6),
                 Text(
                   "$dayStreak Day Streak",
                   style: const TextStyle(
-                    color: AppColors.primaryOrange,
+                    color: AppColors.darkRed,
                     fontWeight: FontWeight.w600,
                     fontSize: 14,
                   ),
@@ -183,16 +180,14 @@ class _LearnPageState extends State<LearnPage> {
                   vertical: 10,
                 ), // 🔥 MORE TAP AREA
                 decoration: BoxDecoration(
-                  color: isSelected
-                      ? AppColors.primaryOrange
-                      : Colors.transparent,
+                  color: isSelected ? AppColors.darkRed : Colors.transparent,
                   borderRadius: BorderRadius.circular(24),
                 ),
                 child: Text(
                   tab,
                   style: TextStyle(
                     fontSize: 15, // 🔥 BIGGER TEXT
-                    color: isSelected ? AppColors.white : AppColors.grey,
+                    color: isSelected ? AppColors.white : AppColors.lightGrey,
                     fontWeight: FontWeight.w600,
                   ),
                 ),

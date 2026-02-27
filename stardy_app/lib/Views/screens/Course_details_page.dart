@@ -11,11 +11,11 @@ class CourseDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryDarkBlue,
+      backgroundColor: AppColors.black,
 
       /// ---------------- APP BAR ----------------
       appBar: AppBar(
-        backgroundColor: AppColors.primaryDarkBlue,
+        backgroundColor: AppColors.black,
         iconTheme: const IconThemeData(color: AppColors.white),
         title: Text(
           course.title,
@@ -78,7 +78,7 @@ class CourseDetailsPage extends StatelessWidget {
                   LinearProgressIndicator(
                     value: course.progress,
                     backgroundColor: Colors.grey[800],
-                    color: AppColors.primaryOrange,
+                    color: AppColors.darkRed,
                     minHeight: 8,
                   ),
 
@@ -133,7 +133,7 @@ class CourseDetailsPage extends StatelessWidget {
                   Text(
                     "Total Chapters: ${course.chapters.length}",
                     style: const TextStyle(
-                      color: AppColors.primaryOrange,
+                      color: AppColors.darkRed,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -172,7 +172,7 @@ class CourseDetailsPage extends StatelessWidget {
           height: 55,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primaryOrange,
+              backgroundColor: AppColors.darkRed,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),

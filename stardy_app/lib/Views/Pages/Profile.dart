@@ -7,7 +7,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryDarkBlue,
+      backgroundColor: AppColors.darkRed,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -35,7 +35,7 @@ class ProfilePage extends StatelessWidget {
                     child: Container(
                       height: 190,
                       width: double.infinity,
-                      color: AppColors.primaryDarkBlue,
+                      color: AppColors.black,
                     ),
                   ),
                   Column(
@@ -48,14 +48,14 @@ class ProfilePage extends StatelessWidget {
                           shape: BoxShape.circle,
                           color: AppColors.white,
                           border: Border.all(
-                            color: AppColors.primaryOrange,
+                            color: AppColors.darkRed,
                             width: 4,
                           ),
                         ),
                         child: const Icon(
                           Icons.person,
                           size: 88,
-                          color: AppColors.primaryDarkBlue,
+                          color: AppColors.darkRed,
                         ),
                       ),
 
@@ -68,7 +68,7 @@ class ProfilePage extends StatelessWidget {
                           vertical: 6,
                         ),
                         decoration: BoxDecoration(
-                          color: AppColors.primaryOrange,
+                          color: AppColors.darkRed,
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: const Text(
@@ -104,16 +104,16 @@ class ProfilePage extends StatelessWidget {
                 width: 66,
                 height: 44,
                 decoration: BoxDecoration(
-                  color: AppColors.accentBlue.withOpacity(0.2),
+                  color: AppColors.black.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(42),
                   border: Border.all(
-                    color: AppColors.primaryOrange.withOpacity(0.6),
+                    color: AppColors.black.withOpacity(0.6),
                     width: 1.5,
                   ),
                 ),
                 child: const Icon(
                   Icons.assistant_outlined,
-                  color: AppColors.primaryOrange,
+                  color: AppColors.darkRed,
                 ),
               ),
 
@@ -126,7 +126,7 @@ class ProfilePage extends StatelessWidget {
                   Text(
                     'NEXT LEVEL PROGRESS',
                     style: TextStyle(
-                      color: AppColors.grey,
+                      color: AppColors.lightGrey,
                       fontSize: 11,
                       letterSpacing: 1.2,
                       fontWeight: FontWeight.w800,
@@ -149,7 +149,7 @@ class ProfilePage extends StatelessWidget {
               Container(
                 height: 10,
                 decoration: BoxDecoration(
-                  color: AppColors.accentBlue.withOpacity(0.3),
+                  color: AppColors.black.withOpacity(0.3),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: FractionallySizedBox(
@@ -157,7 +157,7 @@ class ProfilePage extends StatelessWidget {
                   child: Container(
                     margin: const EdgeInsets.all(2),
                     decoration: BoxDecoration(
-                      color: AppColors.primaryOrange,
+                      color: AppColors.darkRed,
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
@@ -222,7 +222,7 @@ class _RoundIconBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: 20,
-      backgroundColor: AppColors.accentBlue.withOpacity(0.2),
+      backgroundColor: AppColors.black.withOpacity(0.2),
       child: Icon(icon, color: AppColors.white),
     );
   }
@@ -239,8 +239,8 @@ class _Chip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
         color: isAdd
-            ? AppColors.accentBlue.withOpacity(0.3)
-            : AppColors.primaryOrange,
+            ? AppColors.black.withOpacity(0.3)
+            : AppColors.darkRed,
         borderRadius: BorderRadius.circular(24),
       ),
       child: Text(
@@ -263,7 +263,7 @@ class _SettingsCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: AppColors.accentBlue.withOpacity(0.2),
+        color: AppColors.black.withOpacity(0.2),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
@@ -279,7 +279,7 @@ class _SettingsCard extends StatelessWidget {
               ),
             ),
           ),
-          Icon(Icons.chevron_right, color: AppColors.grey),
+          Icon(Icons.chevron_right, color: AppColors.lightGrey),
         ],
       ),
     );

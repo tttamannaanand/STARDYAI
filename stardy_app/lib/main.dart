@@ -19,12 +19,10 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/// 🔹 Initial route function
 String getInitialRoute() {
   return '/';
 }
 
-/// 🔹 Routes map function
 Map<String, WidgetBuilder> getAppRoutes() {
   return {
     '/': (context) => const SplashScreen(),

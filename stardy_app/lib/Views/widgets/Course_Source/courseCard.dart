@@ -14,7 +14,7 @@ class CourseCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
-        color: Colors.grey[900],
+        color: AppColors.black,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
@@ -93,7 +93,7 @@ class CourseCard extends StatelessWidget {
                 const Text(
                   "PROGRESS",
                   style: TextStyle(
-                    color: Colors.grey,
+                    color: AppColors.lightGrey,
                     fontSize: 12,
                     letterSpacing: 1.5,
                   ),
@@ -107,7 +107,7 @@ class CourseCard extends StatelessWidget {
                       child: LinearProgressIndicator(
                         value: course.progress,
                         backgroundColor: Colors.grey[800],
-                        color: AppColors.primaryOrange,
+                        color: AppColors.darkRed,
                         minHeight: 6,
                       ),
                     ),
@@ -125,7 +125,7 @@ class CourseCard extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primaryOrange,
+                      backgroundColor: AppColors.darkRed,
                       shape: const StadiumBorder(),
                     ),
                     onPressed: () {
@@ -137,7 +137,10 @@ class CourseCard extends StatelessWidget {
                         ),
                       );
                     },
-                    child: const Text("Resume"),
+                    child: const Text(
+                      "Resume",
+                      style: TextStyle(color: AppColors.white),
+                    ),
                   ),
                 ),
               ],
