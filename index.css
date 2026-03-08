@@ -1,0 +1,29 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-heading: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Arial", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-primary: #b91c1c;
+  --color-stardy-navy: #f3f4f6;
+  --color-background-light: #ffffff;
+  --color-surface: #ffffff;
+  --color-widget: #f3f4f6;
+  --color-stardy-blue: #f3f4f6;
+  --color-stardy-gray: #e5e7eb;
+
+  --radius-default: 1rem;
+  --radius-lg: 2rem;
+  --radius-xl: 3rem;
+}
+
+@layer base {
+  body {
+    @apply bg-background-light text-slate-900 transition-colors duration-300 font-sans;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
